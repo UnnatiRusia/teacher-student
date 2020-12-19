@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+       <link rel="stylesheet" href="css/faculty.css">
+       <link href="https://fonts.googleapis.com/css2?family=Kite+One&family=Long+Cang&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Changa:wght@500&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<style>
+        a
+        {
+          font-size: 18px;
+          padding: 2px;
+          color: white;
+          text-decoration: none;
+        }
+        .form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+
+</style>
+
+<body>
+  <form class="" action="/teacher" method="post">
+
+
+  <div class="navigation">
+      <ul style="list-style-type: none"class=" nav navbar-nav navbar-left">
+        <li><a href="#"  class="glyphicon glyphicon-home"> Home</a></li>
+      </ul>
+       <ul style="list-style-type: none; margin-right:5px;color:red" class=" nav navbar-nav navbar-right">
+          <li style="padding: 5px"><a href="#" class="glyphicon glyphicon-bell"></a></li>
+          <!-- <li><a href="#" ><img class="avatar" src="images/avatar.png"></a> </li> -->
+          <li >
+            <div class="drop">
+
+
+                <button type="button" name="button" style="background-color:black; border:none; margin-top:6px; outline:none;">
+               <img class="avatar" src="image/avatar.png" alt="">
+
+             </button>
+                <div class="dropdown" >
+                  <a href="#">Profile</a>
+                   <a href="#">Progress</a>
+                   <a href="#">Settings</a>
+                   <a href="#">Log out</a>
+                </div>
+  </div>
+          </li>
+      </ul>
+  </div>
+  <div class="text-center">
+      <h2>Welcome <%= user %></h2>
+        </form>
+  </div><br><br><br><br>
+
+
+        <br>
+        <button class="button_t" style="margin-left: 450px" onclick="openForm()"><span>Add Subject </span></button>
+        <div class="form-popup" id="myForm">
+        <form class="form-container" action="/create" method="post">
+          <h1>Create Class</h1>
+          <label for="id"><b>ID</b></label>
+          <input type="text" placeholder="Enter id" name="id" required>
+          <label for="subname"><b>Subject Name</b></label>
+          <input type="text" placeholder="Enter subject name" name="subname" required>
+          <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+
+   <button type="submit" class="btn">Create</button>
+   <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+ </form></div>
+        <br>
+         <form class="" action="/managesubject" method="post">
+        <button class="button_t" style="margin-left:450px"><span>Manage Subject </span></button>
+           </form>
+        
+
+        <br><br><br><br>
+
+
+
+      <script>
+      function openForm() {
+        document.getElementById("myForm").style.display = "inline";
+      }
+
+      function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+      }
+      </script>
+
+</body>
+  <%- include('footer'); -%>
+</html>

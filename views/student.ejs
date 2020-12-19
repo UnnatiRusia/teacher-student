@@ -1,0 +1,57 @@
+<%- include('header'); -%>
+
+    <div class="text-center">
+        <h2>Welcome <%= user %></h2>
+    </div><br><br><br><br>
+    <div class="container">
+
+
+
+    </form>
+    <div class="functio">
+
+      <div class="addclass">
+        <div class="block-2 red">
+          <div class="text-center">
+            <h3 style="color:white;">Join the class</h3>
+            <form class="" action="/join" method="post"><br><br><br>
+               <input type="text" name="name" placeholder="ID"><br><br>
+               <input type="password" name="password" placeholder="password"><br><br>
+               <button class="b1" type="submit" name="button">Join</button>
+            </form>
+          </div>
+
+      </div>
+    </div>
+      <br>
+      <br>
+      <div class="online">
+        <div class="semicircle">
+
+        </div>
+        <div class="text-center">
+          <h3>Give Online test</h3><br><br><br>
+          <p>Join our online test series free !!!! choose your favorite subjects and check your knowledge
+          </p><br><br>
+          <button class="b1" type="submit" name="button">test</button>
+        </div>
+
+      </div>
+      <div class="pro">
+        <form class="" action="/check" method="post">
+          <div class="text-center">
+            <h3>Check the existing class</h3> <br><br><br>
+             You have enroll to number of classes.
+             <br><br><br><br>
+             <button class="b1" type="submit" name="button">check</button>
+          </div>
+        </form>
+
+
+      </div>
+    </div>
+
+  </div>
+
+  <br><br><br><br><br>
+  <%- include('footer'); -%>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+       <link rel="stylesheet" href="css/createquiz.css">
+       <link href="https://fonts.googleapis.com/css2?family=Kite+One&family=Long+Cang&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Changa:wght@500&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <form class="" action="/createqui" method="post">
+      <div class="navigation">
+          <ul style="list-style-type: none"class=" nav navbar-nav navbar-left">
+            <li><a href="#"  class="glyphicon glyphicon-home"> Home</a></li>
+          </ul>
+           <ul style="list-style-type: none; margin-right:5px;color:red" class=" nav navbar-nav navbar-right">
+              <li style="padding: 5px"><a href="#" class="glyphicon glyphicon-bell"></a></li>
+              <!-- <li><a href="#" ><img class="avatar" src="images/avatar.png"></a> </li> -->
+              <li >
+                <div class="drop">
+
+
+                    <button type="button" name="button" style="background-color:black; border:none; margin-top:6px; outline:none;">
+                   <img class="avatar" src="image/avatar.png" alt="">
+
+                 </button>
+                    <div class="dropdown" >
+                      <a href="#">Profile</a>
+                       <a href="#">Progress</a>
+                       <a href="#">Settings</a>
+                       <a href="#">Log out</a>
+                    </div>
+      </div></div>
+      <div class="jumbotron">
+    <h1 style="text-align:center">Create Quiz</h1>
+    <div class="container">
+
+            <% if(l ==0){ %>
+               <h3>No Question</h3>
+          <%   }else{ %>
+            <%  list.forEach(function(items){ %>
+
+           <p>Question <%= c %></p>
+            <p><%= items.question %></p>
+              <p>a)<%= items.o1 %></p>
+              <p>b)<%= items.o2 %></p>
+              <p>c)<%= items.o3 %></p>
+              <p>d)<%= items.o4 %></p>
+              <h3>Answer</h3>
+              <p><%= items.ans %></p>
+              <button type="submit" name="remove" class="btn btn-danger">REMOVE</button>
+      <% c=c+1 }) %>
+      <%    } %>
+         <p>Enter Question</p>
+         <input type="text" name="id" value="<%= id %>" hidden>
+      <input class="form-control" type="text" name="question" value="" placeholder="Enter Question" >
+      <div class="radio">
+    <label><input class="form-control"  type="text" name="option1" value="" placeholder="option 1" /> </label>
+  </div>
+  <div class="radio">
+    <label > <input class="form-control"  type="text" name="option2" value="" placeholder="option 2" /> </label>
+    </div>
+    <div class="radio">
+      <label><input class="form-control"  type="text" name="option3" value="" placeholder="option 3" /> </label>
+    </div>
+    <div class="radio">
+      <label><input class="form-control"  type="text" name="option4" value="" placeholder="option 4" /> </label>
+    </div><label>Enter Answer</label>
+     <input type="text" name="answer" value="" placeholder="Enter answer a/b/c/d" >
+      <button type="submit" name="button" class="btn btn-success" >ADD</button></form>
+      <hr>
+      <form class="" action="/quizready_:id" method="post">
+        <input type="text" name="id" value="<%= id %>" hidden>
+        <label for="marks">Enter Marks: </label>
+        <input type="text" name="marks" value="" placeholder="Marks for Each Question"/ required>
+        <hr>
+        <label for="date">Enter Date</label>
+        <input type="date" name="date" value="" placeholder="Enter the Date" required/>
+        <hr>
+        <label for="stime">Enter Starting Time</label>
+        <input type="time" name="stime" value="" required/> <br>
+        <label for="etime">Enter Ending Time</label>
+        <input type="time" name="etime" value="" required />
+        <button type="submit" class="btn btn-success" name="button">Create Test</button>
+      </form>
+ </div>
+  </div>
+   <div id="result"></div>
+
+    <script>
+     function myFunction() {
+         console.log(document.getElementsByName('option1'));
+     }
+
+    </script>
+
+    </form>
+  </body>
+</html>

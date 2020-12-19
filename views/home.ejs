@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>student</title>
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+     <link rel="stylesheet" href="css/homestyle.css">
+     <link href="https://fonts.googleapis.com/css2?family=Kite+One&family=Long+Cang&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet">
+  </head>
+  <body >
+    <form class="" action="/home" method="post">
+
+
+        <div class="navigation">
+            <ul style="list-style-type: none"class=" nav navbar-nav navbar-left">
+              <li><a href="#"  class="glyphicon glyphicon-home"> Home</a></li>
+            </ul>
+             <ul style="list-style-type: none; margin-right:5px;color:red" class=" nav navbar-nav navbar-right">
+                <li style="padding: 5px"><a href="#" class="glyphicon glyphicon-bell"></a></li>
+                <!-- <li><a href="#" ><img class="avatar" src="images/avatar.png"></a> </li> -->
+                <li >
+                  <div class="drop">
+
+
+                      <button type="button" name="button" style="background-color:black; border:none; margin-top:6px; outline:none;">
+                     <img class="avatar" src="image/avatar.png" alt="">
+
+                   </button>
+                      <div class="dropdown" >
+                        <a href="#">Profile</a>
+                         <a href="#">Progress</a>
+                         <a href="#">Settings</a>
+                         <a href="#">Log out</a>
+                      </div>
+        </div>
+                </li>
+            </ul>
+        </div>
+      </form>
+        <div class="container">
+          <h2 style="text-align:center">Welcome <%= user %></h2> <br><br><br>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-2" style="width: 350px;height: 350px;background-color:#ff4d4d;margin-right:100px;margin-left:150px;border-radius: 40px 10px 40px 10px;">
+                  <h3 style="text-align:center">Teacher</h3>
+                  <form class="" action="/teacherbutton" method="post">
+                      <button type="submit" name="button" class="btn btn-outline-primary" >Join As Teacher</button>
+                  </form>
+
+              </div>
+              <div class="col-md-2" style="width: 350px;height: 350px;background-color:#7070db;border-radius: 40px 10px 40px 10px;">
+                   <h3 style="text-align:center">Student</h3>
+                   <form class="" action="/studentbutton" method="post">
+                     <button type="submit" name="button" class="btn btn-outline-primary" ">Join As Student</button>
+                   </form>
+
+              </div>
+            </div>
+          </div>
+
+        </div>

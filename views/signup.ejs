@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+   />
+  </head>
+
+  <body style="background: lightgray">
+    <form class="" action="/signup" method="post">
+      <div class="container_login">
+        <div class="login_img">
+          <img
+            style="height: 600px"
+            class="img-responsive"
+            src="image/"
+          />
+        </div>
+        <div class="login_pannel">
+          <br />
+
+          <h2 style="margin-left: 50px">Sign Up</h2>
+
+          <br />
+
+            <input
+              type="text"
+              class="login_btn"
+              placeholder="Enter Your Username / Email"
+              name="username"
+              required="true"
+            />
+            <input
+              type="password"
+              class="login_btn"
+              placeholder="Enter Your Password"
+              name="password"
+              required="true"
+            />
+            <br />
+            <button type="submit" class="submit_btn" value="submit">
+              CONTINUE >
+            </button>
+             <button type="" class="submit_btn" name="button"> <a href="/">Sign In</a></button>
+
+          <br />
+          <br />
+          <h5 style="margin-left: 100px">
+            ------- And Connect With Us On -------
+          </h5>
+          <br />
+          <div
+            href="#"
+            data-onsuccess="onSignIn"
+            data-width="100px"
+            data-redirecturi="http://localhost:8000/faculty"
+            class="g-signin2"
+          ></div>
+
+          <a href="#" class="fa fa-google"></a>
+          <a href="#" class="fa fa-instagram"></a>
+          <a href="#" class="fa fa-linkedin"></a>
+        </div>
+      </div>
+    </form>
+
+  </body>
+</html>
