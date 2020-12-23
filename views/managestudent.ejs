@@ -32,7 +32,7 @@
                       <a href="#">Profile</a>
                        <a href="#">Progress</a>
                        <a href="#">Settings</a>
-                       <a href="#">Log out</a>
+                       <a href="/">Log out</a>
                     </div>
       </div></div>
       <% var c=0 %>
@@ -49,22 +49,22 @@
                </div>
                <div class="col-xs-2 text-right">
 
-                     <a href="/student_<%= items.id %>" class="btn btn-success" role="button">Manage</a>
+                     <a href="/student_<%= items.id %>" class="btn btn-success" role="button">Class</a>
                </div>
-               <div class="col-xs-2 text-right">
+               <!-- <div class="col-xs-2 text-right">
                      <a class="btn btn-success" id="omg<%= c %>"  role="button" style="display:none">Give Quiz</a>
-               </div>
+               </div> -->
 
            </li>
 
-           <script >
+           <!-- <script >
             window.addEventListener("load", function(){
               var newButton = document.getElementById("omg<%= c %>");
               var date=new Date()
               if(date.getDate()==19){
               newButton.style.display = "block";}
             },false)
-           </script>
+           </script> -->
 <% c=c+1 %>
       <%   }) %>
        </ul>

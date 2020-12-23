@@ -51,7 +51,7 @@ userSchema.plugin(passportLocalMongoose)
 // userSchema.plugin(encrypt,{secret:secret,encryptedFields:['password']}) normal password encryp
 const User=new mongoose.model("User",userSchema)
 const userSchema1=new mongoose.Schema({
-
+  email:String,
   id:String,
   subname:String,
   password:String
@@ -69,11 +69,13 @@ const itemsSchema=new mongoose.Schema({
 const Item=mongoose.model("Item",itemsSchema);
 
 const userContent=new mongoose.Schema({
+  email:String,
   id:String,
   content:[itemsSchema]
 })
 const Usercon=new mongoose.model("Usercon",userContent)
 const userCreate=new mongoose.Schema({
+  email:String,
   id:String,
   password:String,
   subname:String
@@ -90,6 +92,7 @@ const Userqu=new mongoose.Schema({
 
 const Userque=new mongoose.model("Userque",Userqu)
 const Userqui=new mongoose.Schema({
+  email:String,
   id:String,
   qulist:[Userqu],
   marks:Number,
@@ -101,8 +104,20 @@ const Userqui=new mongoose.Schema({
 const Userquiz=new mongoose.model("Userquiz",Userqui)
 const Userfinalschema=new mongoose.Schema({
   email:String,
-  
+  tecsub:[userSchema1],
+  teccon:[userContent],
+  stucre:[userCreate],
+  tecquiz:[Userqui]
+
 })
+const userfinal=new mongoose.model("userfinal",Userfinalschema)
+const Userrec=new mongoose.Schema({
+  email:String,
+  total:Number,
+  id:String,
+  Sub:String
+})
+const Userrecord=new mongoose.model("Userrecord",Userrec)
 var username=""
 passport.use(new LocalStrategy({
     username: 'email',
@@ -179,7 +194,7 @@ app.get("/teacher",function(req,res) {
   res.render("faculty",{user:s[0]})
 })
 app.get('/managestudent',function(req,res) {
-  Usercre.find({},function(err,findItems) {
+  Usercre.find({email:username},function(err,findItems) {
 
     res.render("managestudent",{sub:findItems})
   })
@@ -213,7 +228,7 @@ app.post("/uploadProfilePicture",function (req, res, next) {
 })
 
 app.get("/managesubject",function(req,res) {
-  Usersub.find({},function(err,findItems) {
+  Usersub.find({email:username},function(err,findItems) {
     if(findItems.length ==0){
         console.log("no length");
       }
@@ -223,16 +238,78 @@ app.get("/managesubject",function(req,res) {
   })
 
 })
+app.get("/checkpro:id",function(req,res) {
+  const id=req.params.id
+  Userrecord.find({id:id},function(err,foundlist) {
+    console.log(foundlist);
+    res.render("checkpro",{list:foundlist})
+  })
+})
 app.get("/student_:id",function(req,res) {
   const id=req.params.id
   Usercon.findOne({id:id},function(err,foundlist) {
-    res.render("class",{id:id,content:foundlist.content})
+    if(foundlist.content){
+      Userquiz.findOne({id:id},function(err,q) {
+        if(q){
+          res.render("class",{id:id,content:foundlist.content,l:1,date:q.date})}
+
+        else{
+          res.render("class",{id:id,content:foundlist.content,l:1,date:"0"})}})
+        }
+
+
+    else{
+      Userquiz.findOne({id:id},function(err,q) {
+        if(q){
+          res.render("class",{id:id,content:"No Content",l:0,date:q.date})}
+
+        else{
+          res.render("class",{id:id,content:"No Content",l:0,date:"0"})}})
+
+    }})
   })
-})
+  app.get("/givequiz_:id",function(req,res) {
+    const id=req.params.id
+    Userquiz.findOne({id:id,email:username},function(err,foundlist) {
+      Usercre.findOne({id:id,email:username},function(err,foundUser) {
+          res.render("stuquiz",{id:id,qui:foundlist,sub:foundUser.subname,c:1})
+      })
+
+    })
+  })
+  app.post("/stuquiz:id",function(req,res) {
+    const id=req.params.id
+    const c=req.body.c
+    let l=req.body
+    var ans=[]
+    for(var key in l){
+      ans.push(l[key]);
+    }
+    console.log(ans);
+    var key=[]
+    var total=0
+    Userquiz.findOne({id:id,email:username},function(err,foundlist) {
+      for(var i=0;i<c;i++){
+      if(foundlist.qulist[i].ans == ans[i]){
+        total=total+foundlist.marks
+
+      }
+    }
+
+        const r=new Userrecord({
+          id:id,
+          email:username,
+          total:total
+        })
+        r.save()
+        res.send("Marks are: "+total)
+    })
+
+  })
 const c=1
 app.get("/createqui_:id",function(req,res) {
   const id=req.params.id;
-  Userquiz.findOne({id:id},function(err,foundlist) {
+  Userquiz.findOne({id:id,email:username},function(err,foundlist) {
     if(!foundlist){
       res.render("createquiz",{l:0,id:id})
     }
@@ -259,9 +336,10 @@ app.post("/createqui",function(req,res) {
     ans:ans,
 
   })
-  Userquiz.findOne({id:id},function(err,foundlist) {
+  Userquiz.findOne({id:id,email:username},function(err,foundlist) {
     if(!foundlist){
       const uq=new Userquiz({
+        email:username,
         id:id,
         qulist:q1
       })
@@ -313,7 +391,7 @@ app.get("/existquiz_:id",function(req,res) {
 app.post("/totalquiz",function(req,res) {
   const id=req.body.id
   const sub1=req.body.sub
-  Userquiz.findOne({id:id},function(err,foundlist) {
+  Userquiz.findOne({id:id,email:username},function(err,foundlist) {
       res.render("quiz",{id:id,sub:sub1,qu:foundlist,c:1})
   })
 
@@ -321,12 +399,13 @@ app.post("/totalquiz",function(req,res) {
 app.get("/:id",function(req,res) {
 
   const id=req.params.id
-  Usercon.findOne({id:id},function(err,foundUser) {
+  Usercon.findOne({id:id,email:username},function(err,foundUser) {
     if(!foundUser){
       const item=new Item({
         name:['Welcome']
       });
       const h=new Usercon({
+        email:username,
         id:req.params.id,
         content:item
       })
@@ -348,9 +427,10 @@ app.post("/manage",function(req,res) {
   const item=new Item({
     name:content
   });
-  Usercon.findOne({id:id},function(err,foundlist) {
+  Usercon.findOne({id:id,email:username},function(err,foundlist) {
     if (!foundlist){
       const u=new Usercon({
+        email:username,
         id:id,
         content:item
       })
@@ -369,8 +449,9 @@ app.post("/managesubject",function(req,res) {
   res.redirect("managesubject")
 })
 app.post("/create",function(req,res) {
-
+ console.log(username);
    const newUSer=new Usersub({
+     email:username,
      id:req.body.id,
      subname:req.body.subname,
      password:req.body.psw
@@ -393,6 +474,10 @@ User.register({username:req.body.username},req.body.password,function(err,user) 
   }
   else{
     username=req.body.username
+    const p=new userfinal({
+      email:username
+    })
+    p.save()
      passport.authenticate("local")(req,res,function() {
        res.redirect("/home")
      })
@@ -428,6 +513,7 @@ req.login(user,function(err){
   else{
     passport.authenticate("local")(req,res,function(){
       username=req.body.username
+
       res.redirect("/home")
     })
   }
@@ -463,17 +549,19 @@ app.post("/join",function(req,res) {
       if(foundlist.password==password){
 
         const a=Usercre({
+          email:username,
           id:name,
           password:password,
          subname:foundlist.subname
         })
         a.save()
-
+        res.redirect("/managestudent")
 
       }
     }
   })
 })
+
 app.post("/check",function(req,res) {
   res.redirect("/managestudent")
 })

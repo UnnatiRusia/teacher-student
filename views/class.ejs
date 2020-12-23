@@ -15,7 +15,7 @@
 
   </head>
   <body>
-    <form class="" action="/manage" method="post">
+    <form class="" action="/class" method="post">
 
 
               <div class="navigation">
@@ -37,7 +37,7 @@
                               <a href="#">Profile</a>
                                <a href="#">Progress</a>
                                <a href="#">Settings</a>
-                               <a href="#">Log out</a>
+                               <a href="/">Log out</a>
                             </div>
               </div>
                       </li>
@@ -53,14 +53,17 @@
        <div class="col-xs-10">
          <div class="jumbotron">
              <div class="box">
+              <% if(l==0){ %>
 
+                 <p>No content</p>
+            <%   }else{ %>
                 <%  content.forEach(function(item){ %>
                   <div class="row" style="text-align:center">
                       <%= item.name %>
                   </div>
 
-                  <% }) %>
-              
+                  <% }) }%>
+
                    </form>
 
                </form>
@@ -70,13 +73,14 @@
        </div>
        <div class="col-xs-2 text-right">
               <div class="row">
-                <a href="/createqui_<%= id %>" class="btn btn-success" role="button" >Create Quiz</a>
+                <a href="/givequiz_<%= id%>" class="btn btn-success" id="quiz1" role="button" style="display:none"> Quiz</a>
 
               </div> <br>
               <div class="row">
-                <a href="/existquiz_<%= id %>" class="btn btn-success" role="button" >existing quiz</a>
+                <a  class="btn btn-success" role="button" >Progress</a>
 
               </div>
+
 
 
        </div>
@@ -84,6 +88,19 @@
 
 
       </div>
+      <script>
+        window.addEventListener("load", function(){
+          var today = new Date();
+          var dd = String(today.getDate()).padStart(2, '0');
+          var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+          var yyyy = today.getFullYear();
+          today=yyyy+'-'+mm+'-'+dd
+          // "<%= date %>"
+          if(today== "<%= date %>"){
+          var newButton = document.getElementById("quiz1");
+          newButton.style.display = "inline";}
+        },false)
+      </script>
 
     </form>
   </body>
